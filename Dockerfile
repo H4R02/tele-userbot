@@ -1,13 +1,13 @@
 FROM python:3.12-slim
 
-# Install system dependencies
+# Install essential system dependencies
+# Removed neofetch as it's not available in the slim image's default repositories and was causing the error.
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     curl \
     ffmpeg \
     wget \
     bash \
-    neofetch \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -22,5 +22,5 @@ COPY . .
 
 EXPOSE 5000
 
-# Command to run the application
+# This command will be overridden by your Procfile on Render
 CMD ["python3", "main.py"]
